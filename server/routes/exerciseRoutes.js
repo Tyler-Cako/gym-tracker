@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const { getExercises } = require('../controllers/exerciseController')
 
-router.get('/', (req, res) => {
-    res.status(200).send('request recieved')
-})
+router.get('/', getExercises)
 
 module.exports = router
