@@ -14,10 +14,8 @@ const benchPress = new Exercise({
     Reps: 8
 })
 
-benchPress.save().then(result => {
-    console.log('Exercise saved!')
-    console.log(result)
-})
+app.use('/api/exercises', require('./routes/exerciseRoutes'))
+
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
