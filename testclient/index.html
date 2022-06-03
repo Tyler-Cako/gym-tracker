@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <form action="/api/exercises" method="GET">
+        <label>Submit GET Request</label>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <form action="/api/exercises" method="POST">
+        <label>Submit POST Request</label>
+        <label for="type">Exercise Type</labe>
+        <input type="text" id="type" name="type">
+        <label>Exercise Name</label>
+        <input type="text" id="name" name="name">
+        <label>Weight</label>
+        <input type="number" id="weight" name="weight">
+        <label>Number of Reps</label>
+        <input type="number" id="reps" name="reps">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

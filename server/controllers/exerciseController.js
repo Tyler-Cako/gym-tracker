@@ -15,9 +15,14 @@ const getExercises = asyncHandler( async (req, res) => {
 // @access      Private
 const newExercise = asyncHandler( async (req, res) => {
     try{
-        const goal = await Exercise.create(newExerciseDocument)
-
-        res.status(200).send(`goal recieved! goal is ${goal}`)
+        // const goal = await Exercise.create(newExerciseDocument)
+        const Exer = await Exercise.create({
+            Type: req.body.type,
+            Exercise: req.body.name,
+            Weight: req.body.weight,
+            Reps: req.body.reps
+        })
+        res.status(200).json(Exer)
     }
     catch (error) {
         console.log(error)
