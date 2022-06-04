@@ -29,6 +29,9 @@ const newExercise = asyncHandler( async (req, res) => {
     }
 })
 
+// @desc        Delete all API exercise documents. Clears api
+//@route        DELETE /api/exercises
+//@access       Private
 const deleteExercises = asyncHandler( async (req, res) => {
     try {
         // const goal = await Exercise.create(newExerciseDocument)
