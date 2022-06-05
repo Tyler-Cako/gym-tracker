@@ -11,7 +11,7 @@ app.use(express.json()) // Express.json middleware, which parses JSON in the REQ
 app.use(express.urlencoded({ extended: false })) // express.urlencoded middleware, which parses ENCODED JSON from the REQ object so that undefined isn't returned
 
 app.use('/api/exercises', require('./routes/exerciseRoutes')) //Uses express routing middleware to cleanup code and put routes in exerciseRoutes.js
-app.use('/api/users', require('./routes/userRoutes')) //Routing stead to userRoutes.js
+app.use('/api/users', require('./routes/userRoutes')) //Routing instead to userRoutes.js
 
 app.use(express.static(path.join(__dirname, '../testclient')))
 

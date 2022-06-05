@@ -16,11 +16,13 @@ const getExercises = asyncHandler( async (req, res) => {
 const newExercise = asyncHandler( async (req, res) => {
     try {
         // const goal = await Exercise.create(newExerciseDocument)
+        const { type, exercise, weight, reps } = req.body
+        
         const Exer = await Exercise.create({
-            type: req.body.type,
-            exercise: req.body.name,
-            weight: req.body.weight,
-            reps: req.body.reps
+            type: type,
+            exercise: exercise,
+            weight: weight,
+            reps: reps
         })
         res.status(200).json(Exer)
     }
@@ -30,8 +32,8 @@ const newExercise = asyncHandler( async (req, res) => {
 })
 
 // @desc        Delete all API exercise documents. Clears api
-//@route        DELETE /api/exercises
-//@access       Private
+// @route        DELETE /api/exercises
+// @access       Private
 const deleteExercises = asyncHandler( async (req, res) => {
     try {
         // const goal = await Exercise.create(newExerciseDocument)

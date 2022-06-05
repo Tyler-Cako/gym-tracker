@@ -7,7 +7,7 @@ const {
 } = require('../controllers/exerciseController') //import express functions for desired routes from exerciseController.js
 
 router.route('/').get(getExercises).post(newExercise) // GET/POST req sent to exerciseController.js
-router.delete('/', deleteExercises)
+router.delete('/', deleteExercises) // DELETE request that currently clears exercise API
 
 
 module.exports = router //export router for index.js
