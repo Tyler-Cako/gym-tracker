@@ -3,6 +3,19 @@ const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 
+// @desc       Get Users names and email
+// @route      GET api/users
+const getUsers = asyncHandler( async(req, res) => {
+    const Users = await User.find()
+    res.status(200).json({
+        name: Users.name,
+        email: Users.email
+    })
+})
+
+// @desc        Register a new, unique user
+// @route       GET api/users
+// @access      Public
 const registerUser = asyncHandler ( async(req, res) => {
     const { name, email, password } = req.body
 
@@ -23,7 +36,7 @@ const registerUser = asyncHandler ( async(req, res) => {
     }
 
     // hash password
-    const salt = await bcrypt.genSalt(10)
+    const salt = await bcrypt.genSalt(10) 
     const hashedPassword = await bcrypt.hash(password, salt)
 
     const user = await User.create({
@@ -46,4 +59,5 @@ const registerUser = asyncHandler ( async(req, res) => {
 
 module.exports = {
     registerUser,
+    getUsers,
 }
