@@ -5,21 +5,17 @@ const User = require('../models/userModel')
 
 // @desc       Get Users names and email
 // @route      GET api/users
+// @access     Private
 const getUsers = asyncHandler( async(req, res) => {
     const Users = await User.find()
-    res.status(200).json({
-        name: Users.name,
-        email: Users.email
-    })
+    res.status(200).json(Users)
 })
 
 // @desc        Register a new, unique user
-// @route       GET api/users
+// @route       POST api/users
 // @access      Public
 const registerUser = asyncHandler ( async(req, res) => {
     const { name, email, password } = req.body
-
-   res.json(req.body)
 
     if(!name || !email || !password ) {
         res.status(400)
@@ -42,14 +38,15 @@ const registerUser = asyncHandler ( async(req, res) => {
     const user = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        token: generateToken(user._id)
     })
 
     if(user) {
         res.status(201).json({
             _id: user.id,
-             name : user.name,
-             email: user.email
+            name : user.name,
+            email: user.email
         })
     } else {
         res.status(400)
@@ -57,7 +54,34 @@ const registerUser = asyncHandler ( async(req, res) => {
     }
 })
 
+// @desc        Login user
+// @route       POST api/users/login
+// @access      Public
+const loginUser = asyncHandler( async(req, res) => {
+    const { email, password } = req.body
+
+    const userExists = await User.findOne({email})
+
+    if(userExists && (await bcrypt.compare(password, userExists.password))) {
+        res.json({
+            _id: userExists.id,
+            name : userExists.name,
+            email: userExists.email,
+            token: generateToken(userExists._id)
+        })
+    } else {
+        throw new Error('invalid credentials')
+    }
+})
+
+const generateToken = (id) => {
+    return jwt.sign(id, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+    })
+}
+
 module.exports = {
     registerUser,
     getUsers,
+    loginUser
 }
