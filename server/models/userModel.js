@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') // Initialize mongoose
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({ // Create new schema from mongoose class
     name: {
         type: String,
         required: [true, 'Please add a name']
@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
     },
 },
 {
-    timestamps: true
+    timestamps: true // Gives timestamps for every new document created with model
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema) // Makes new model with the name "User". Exported for to register users

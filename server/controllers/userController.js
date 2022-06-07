@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
-const asyncHandler = require('express-async-handler')
-const User = require('../models/userModel')
+const jwt = require('jsonwebtoken') // Init Json Web Token
+const bcrypt = require('bcryptjs') //Init Bcrypt to encrypt password
+const asyncHandler = require('express-async-handler') // Inits asyncHandler which allows express to handle asyncronous promises from Mongoose
+const User = require('../models/userModel') // Import model "User" from userModel.js
 
-// @desc       Get Users names and email
+// @desc       Get Users 
 // @route      GET api/users
 // @access     Private
 const getUsers = asyncHandler( async(req, res) => {
@@ -15,7 +15,7 @@ const getUsers = asyncHandler( async(req, res) => {
 // @route       POST api/users
 // @access      Public
 const registerUser = asyncHandler ( async(req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, password } = req.body // Sets
 
     if(!name || !email || !password ) {
         res.status(400)
