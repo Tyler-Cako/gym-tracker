@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({ // Create new schema from mongoose class
     email: {
         type: String,
         required: [true, 'Please add an email'],
+        lowercase: true,
         unique: true
     },
     password: {

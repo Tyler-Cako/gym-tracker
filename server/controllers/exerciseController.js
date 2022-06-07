@@ -6,7 +6,7 @@ const newExerciseDocument = require('../testDocuments/newExerciseDocument') //Te
 // @route       GET /api/exercises
 // @access      Private
 const getExercises = asyncHandler( async (req, res) => {
-    const Exercises = await Exercise.find()
+    const Exercises = await Exercise.find({ user: req.user.id })
     res.status(200).json(Exercises)
 })
 
@@ -18,7 +18,10 @@ const newExercise = asyncHandler( async (req, res) => {
         // const goal = await Exercise.create(newExerciseDocument)
         const { type, exercise, weight, reps } = req.body
         
+        console.log(req.user)
+
         const Exer = await Exercise.create({
+            user: req.user.id,
             type: type,
             exercise: exercise,
             weight: weight,
