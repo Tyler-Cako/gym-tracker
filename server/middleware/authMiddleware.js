@@ -8,12 +8,11 @@ const protect = asyncHandler( async(req, res, next) => {
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) { // Run only if there is authorization that starts with BEARER
         try {
             token = req.headers.authorization.split(' ')[1] // Authorization token returns a value among the lines of: BEARER <Token>. This splits the token into the part we care about, and removed the BEARER component.
-
-            console.log(token)
             
             const decoded = jwt.verify(token, process.env.JWT_SECRET) // Decodes the JWT token using the secret in the environmental variable
-            console.log(decoded)
+            console.log(`Testing ${req.user}`)
             req.user = await User.findById(decoded.id).select('-password') // Assigns the user component of a request with its corresponding ID identified from the decoded JWT token
+            console.log(`Now testing ${req.user}`)
             next() // This is middleware, therefore next() needs to be called for the rest of the code can be completed
         } catch(error) { // If authorization tokens do not match
             console.log(error)
